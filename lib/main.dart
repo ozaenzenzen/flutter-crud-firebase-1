@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
         title: "FAM CRUD Firestore 1",
         home: MainPage(),
         debugShowCheckedModeBanner: false,
+        defaultTransition: Transition.cupertino,
       ),
     );
   }
