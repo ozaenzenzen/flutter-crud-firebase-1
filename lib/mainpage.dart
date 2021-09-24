@@ -29,15 +29,18 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
         elevation: 0,
         title: Text(
-          "FAM CRUD Firestore",
+          (initIndex == 0)
+              ? "FAM CRUD Firestore | Home"
+              : "FAM CRUD Firestore | Profile",
           style: GoogleFonts.raleway(
-            fontSize: screenUtil.setSp(18),
+            fontSize: screenUtil.setSp(15),
             fontWeight: FontWeight.w600,
           ),
         ),
       ),
       body: PageView(
         children: page,
+        physics: NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: (index) {
           setState(() {
