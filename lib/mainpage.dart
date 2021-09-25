@@ -55,8 +55,7 @@ class _MainPageState extends State<MainPage> {
         onTap: (index) {
           setState(() {
             initIndex = index;
-
-            print(initIndex);
+            // print(initIndex);
             pageController.jumpToPage(index);
           });
         },
