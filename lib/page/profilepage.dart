@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_firebase_1/data/ratecalculation_data.dart';
+import 'package:flutter_crud_firebase_1/page/editprofilepage.dart';
 import 'package:flutter_crud_firebase_1/utils/fam_images.dart';
 import 'package:flutter_crud_firebase_1/utils/fam_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -62,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   onPressed: () {
-                    //
+                    Get.to(() => EditProfilePage());
                   },
                   child: Text(
                     "Edit Profile",
