@@ -49,6 +49,7 @@ class _MainPageState extends State<MainPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey[100],
         currentIndex: initIndex,
         selectedItemColor: Colors.pink[800],
         unselectedItemColor: Colors.grey.shade600,
