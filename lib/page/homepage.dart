@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crud_firebase_1/page/adddata_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,13 +36,29 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Get.to(() => AddDataPage());
             },
-            child: Text("Add"),
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.add_circled_solid,
+                ),
+                SizedBox(
+                  width: screenUtil.setWidth(10),
+                ),
+                Text(
+                  "Add",
+                  style: GoogleFonts.raleway(
+                    fontSize: screenUtil.setSp(16),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40),
               ),
               minimumSize: Size(
-                screenUtil.setWidth(100),
+                screenUtil.setWidth(120),
                 screenUtil.setHeight(40),
               ),
               primary: Colors.pink.shade800,
