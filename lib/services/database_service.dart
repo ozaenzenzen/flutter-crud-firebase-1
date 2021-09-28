@@ -4,6 +4,7 @@ import 'package:flutter_crud_firebase_1/model/account_model.dart';
 class DatabaseService {
   static CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('account');
+  DocumentReference? docref;
 
   Future createObjectAccount(AccountModel accountModel) async {
     // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
@@ -33,13 +34,21 @@ class DatabaseService {
     return collectionReference.snapshots();
   }
 
-  Future updateDataAccount(AccountModel accountModel) async {
-    await collectionReference.doc(accountModel.name).update({
+  Future updateDataAccount(AccountModel accountModel, String name) async {
+    await collectionReference.doc(name).update({
       'name': accountModel.name,
       'title': accountModel.title,
       'email': accountModel.email,
       'citizen': accountModel.citizen,
       'aboutMe': accountModel.aboutMe,
     });
+
+    // await docref!.update({
+    //   'name': accountModel.name,
+    //   'title': accountModel.title,
+    //   'email': accountModel.email,
+    //   'citizen': accountModel.citizen,
+    //   'aboutMe': accountModel.aboutMe,
+    // });
   }
 }
