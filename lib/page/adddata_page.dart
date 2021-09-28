@@ -205,6 +205,26 @@ class _AddDataPageState extends State<AddDataPage> {
                 height: screenUtil.setHeight(5),
               ),
               TextField(
+                textInputAction: TextInputAction.done,
+                onSubmitted: (data) {
+                  print(data);
+                  var accountData = AccountModel(
+                    name: nameController.text,
+                    title: titleController.text,
+                    email: emailController.text,
+                    citizen: citizenController.text,
+                    aboutMe: data,
+                  );
+
+                  setState(() {
+                    DatabaseService()
+                        .createObjectAccount(accountData)
+                        .whenComplete(() {
+                      FocusScope.of(context).unfocus();
+                      return Get.back();
+                    });
+                  });
+                },
                 controller: aboutMeController,
                 maxLines: 5,
                 decoration: InputDecoration(
@@ -231,6 +251,7 @@ class _AddDataPageState extends State<AddDataPage> {
                   ),
                   onPressed: () {
                     var accountData = AccountModel(
+                      // id: int.parse(FieldValue.increment(1).toString()),
                       name: nameController.text,
                       title: titleController.text,
                       email: emailController.text,
@@ -241,7 +262,10 @@ class _AddDataPageState extends State<AddDataPage> {
                     setState(() {
                       DatabaseService()
                           .createObjectAccount(accountData)
-                          .whenComplete(() => Get.back());
+                          .whenComplete(() {
+                        FocusScope.of(context).unfocus();
+                        return Get.back();
+                      });
                     });
                   },
                   child: Text("Add Data"),
