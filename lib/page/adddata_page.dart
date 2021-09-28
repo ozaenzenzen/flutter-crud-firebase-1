@@ -19,8 +19,18 @@ class _AddDataPageState extends State<AddDataPage> {
   TextEditingController citizenController = TextEditingController();
   TextEditingController aboutMeController = TextEditingController();
 
+  var data = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
+    print(data['type']);
+    if (data['type'] == 'update') {
+      nameController.text = data['name'];
+      titleController.text = data['title'];
+      emailController.text = data['email'];
+      citizenController.text = data['citizen'];
+      aboutMeController.text = data['aboutMe'];
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -28,7 +38,9 @@ class _AddDataPageState extends State<AddDataPage> {
         centerTitle: true,
         elevation: 0,
         title: Text(
-          "FAM CRUD Firestore | Add Data",
+          (data['type'] == 'add')
+              ? "FAM CRUD Firestore | Add Data"
+              : "FAM CRUD Firestore | Update Data",
           style: GoogleFonts.raleway(
             fontSize: screenUtil.setSp(15),
             fontWeight: FontWeight.w600,
@@ -250,25 +262,49 @@ class _AddDataPageState extends State<AddDataPage> {
                     primary: Colors.pink.shade800,
                   ),
                   onPressed: () {
-                    var accountData = AccountModel(
-                      // id: int.parse(FieldValue.increment(1).toString()),
-                      name: nameController.text,
-                      title: titleController.text,
-                      email: emailController.text,
-                      citizen: citizenController.text,
-                      aboutMe: aboutMeController.text,
-                    );
+                    if (data['type'] == 'add') {
+                      var accountData = AccountModel(
+                        // id: int.parse(FieldValue.increment(1).toString()),
+                        name: nameController.text,
+                        title: titleController.text,
+                        email: emailController.text,
+                        citizen: citizenController.text,
+                        aboutMe: aboutMeController.text,
+                      );
 
-                    setState(() {
-                      DatabaseService()
-                          .createObjectAccount(accountData)
-                          .whenComplete(() {
-                        FocusScope.of(context).unfocus();
-                        return Get.back();
+                      setState(() {
+                        DatabaseService()
+                            .createObjectAccount(accountData)
+                            .whenComplete(() {
+                          FocusScope.of(context).unfocus();
+                          return Get.back();
+                        });
                       });
-                    });
+                    } else {
+                      var accountData = AccountModel(
+                        // id: int.parse(FieldValue.increment(1).toString()),
+                        name: nameController.text,
+                        title: titleController.text,
+                        email: emailController.text,
+                        citizen: citizenController.text,
+                        aboutMe: aboutMeController.text,
+                      );
+
+                      setState(() {
+                        DatabaseService()
+                            .updateDataAccount(accountData, data['name'])
+                            .whenComplete(
+                          () {
+                            FocusScope.of(context).unfocus();
+                            return Get.back();
+                          },
+                        );
+                      });
+                    }
                   },
-                  child: Text("Add Data"),
+                  child: Text(
+                    (data['type'] == 'add') ? "Add Data" : "Update Data",
+                  ),
                 ),
               ),
             ],
