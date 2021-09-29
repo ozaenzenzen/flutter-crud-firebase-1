@@ -247,7 +247,7 @@ class _AddDataPageState extends State<AddDataPage> {
 
                     setState(() {
                       DatabaseService()
-                          .updateDataAccount(accountData, data['name'])
+                          .updateDataAccount(accountData, data['id'])
                           .whenComplete(
                         () {
                           FocusScope.of(context).unfocus();
@@ -317,7 +317,7 @@ class _AddDataPageState extends State<AddDataPage> {
                                           Get.back();
                                           setState(() {
                                             DatabaseService()
-                                                .deleteDataAccount(nameController.text)
+                                                .deleteDataAccount(data['id'])
                                                 .whenComplete(() => Get.back());
                                           });
                                         },
@@ -375,7 +375,7 @@ class _AddDataPageState extends State<AddDataPage> {
 
                           setState(() {
                             DatabaseService()
-                                .updateDataAccount(accountData, data['name'])
+                                .updateDataAccount(accountData, data['id'])
                                 .whenComplete(
                               () {
                                 FocusScope.of(context).unfocus();
