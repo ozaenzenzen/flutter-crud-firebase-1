@@ -28,18 +28,42 @@ class _HomePageState extends State<HomePage> {
             stream: DatabaseService().getAllDataAccount2(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
-                return ListView.builder(
+                return ListView.separated(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     AccountModel accountModelData = AccountModel.fromJson(
                         snapshot.data!.docs[index].data() as Map);
-                    return HomeDataItem(
-                      name: accountModelData.name,
-                      title: accountModelData.title,
-                      email: accountModelData.email,
-                      citizen: accountModelData.citizen,
-                      aboutMe: accountModelData.aboutMe,
+                    return Dismissible(
+                      key: UniqueKey(),
+                      background: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenUtil.setWidth(15),
+                        ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Delete",
+                          style: GoogleFonts.poppins(
+                            fontSize: screenUtil.setSp(25),
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                        color: Colors.red,
+                      ),
+                      child: HomeDataItem(
+                        id: snapshot.data!.docs[index].id,
+                        name: accountModelData.name,
+                        title: accountModelData.title,
+                        email: accountModelData.email,
+                        citizen: accountModelData.citizen,
+                        aboutMe: accountModelData.aboutMe,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Container(
+                      height: screenUtil.setHeight(20),
                     );
                   },
                 );
