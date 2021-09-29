@@ -34,25 +34,17 @@ class DatabaseService {
     return collectionReference.snapshots();
   }
 
-  Future updateDataAccount(AccountModel accountModel, String name) async {
-    await collectionReference.doc(name).update({
+  Future updateDataAccount(AccountModel accountModel, String id) async {
+    await collectionReference.doc(id).update({
       'name': accountModel.name,
       'title': accountModel.title,
       'email': accountModel.email,
       'citizen': accountModel.citizen,
       'aboutMe': accountModel.aboutMe,
     });
-
-    // await docref!.update({
-    //   'name': accountModel.name,
-    //   'title': accountModel.title,
-    //   'email': accountModel.email,
-    //   'citizen': accountModel.citizen,
-    //   'aboutMe': accountModel.aboutMe,
-    // });
   }
 
-  Future deleteDataAccount(String name) async {
-    await collectionReference.doc(name).delete();
+  Future deleteDataAccount(String id) async {
+    await collectionReference.doc(id).delete();
   }
 }
