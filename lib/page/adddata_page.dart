@@ -218,24 +218,44 @@ class _AddDataPageState extends State<AddDataPage> {
               ),
               TextField(
                 textInputAction: TextInputAction.done,
-                onSubmitted: (data) {
-                  print(data);
-                  var accountData = AccountModel(
-                    name: nameController.text,
-                    title: titleController.text,
-                    email: emailController.text,
-                    citizen: citizenController.text,
-                    aboutMe: data,
-                  );
+                onSubmitted: (aboutDataField) {
+                  if (data['type'] == 'add') {
+                    var accountData = AccountModel(
+                      name: nameController.text,
+                      title: titleController.text,
+                      email: emailController.text,
+                      citizen: citizenController.text,
+                      aboutMe: aboutDataField,
+                    );
 
-                  setState(() {
-                    DatabaseService()
-                        .createObjectAccount(accountData)
-                        .whenComplete(() {
-                      FocusScope.of(context).unfocus();
-                      return Get.back();
+                    setState(() {
+                      DatabaseService()
+                          .createObjectAccount(accountData)
+                          .whenComplete(() {
+                        FocusScope.of(context).unfocus();
+                        return Get.back();
+                      });
                     });
-                  });
+                  } else {
+                    var accountData = AccountModel(
+                      name: nameController.text,
+                      title: titleController.text,
+                      email: emailController.text,
+                      citizen: citizenController.text,
+                      aboutMe: aboutDataField,
+                    );
+
+                    setState(() {
+                      DatabaseService()
+                          .updateDataAccount(accountData, data['name'])
+                          .whenComplete(
+                        () {
+                          FocusScope.of(context).unfocus();
+                          return Get.back();
+                        },
+                      );
+                    });
+                  }
                 },
                 controller: aboutMeController,
                 maxLines: 5,
@@ -257,54 +277,119 @@ class _AddDataPageState extends State<AddDataPage> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.pink.shade800,
-                  ),
-                  onPressed: () {
-                    if (data['type'] == 'add') {
-                      var accountData = AccountModel(
-                        // id: int.parse(FieldValue.increment(1).toString()),
-                        name: nameController.text,
-                        title: titleController.text,
-                        email: emailController.text,
-                        citizen: citizenController.text,
-                        aboutMe: aboutMeController.text,
-                      );
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    (data['type'] == 'add')
+                        ? Container()
+                        : ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.redAccent.shade700,
+                              // primary: Colors.pink.shade800,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      "Delete",
+                                      style: GoogleFonts.raleway(
+                                        fontSize: screenUtil.setSp(18),
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    content: Text(
+                                      "Are you sure want to delete this item? You won't be able to revert / undo this.",
+                                      style: GoogleFonts.raleway(
+                                        fontSize: screenUtil.setSp(13),
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.redAccent.shade700,
+                                          elevation: 0,
+                                        ),
+                                        onPressed: () {
+                                          Get.back();
+                                          setState(() {
+                                            DatabaseService()
+                                                .deleteDataAccount(nameController.text)
+                                                .whenComplete(() => Get.back());
+                                          });
+                                        },
+                                        child: Text("Yes"),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text("No"),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                context: context,
+                              );
+                            },
+                            child: Text("Delete Data"),
+                          ),
+                    SizedBox(
+                      width: screenUtil.setWidth(10),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.pink.shade800,
+                      ),
+                      onPressed: () {
+                        if (data['type'] == 'add') {
+                          var accountData = AccountModel(
+                            // id: int.parse(FieldValue.increment(1).toString()),
+                            name: nameController.text,
+                            title: titleController.text,
+                            email: emailController.text,
+                            citizen: citizenController.text,
+                            aboutMe: aboutMeController.text,
+                          );
 
-                      setState(() {
-                        DatabaseService()
-                            .createObjectAccount(accountData)
-                            .whenComplete(() {
-                          FocusScope.of(context).unfocus();
-                          return Get.back();
-                        });
-                      });
-                    } else {
-                      var accountData = AccountModel(
-                        // id: int.parse(FieldValue.increment(1).toString()),
-                        name: nameController.text,
-                        title: titleController.text,
-                        email: emailController.text,
-                        citizen: citizenController.text,
-                        aboutMe: aboutMeController.text,
-                      );
+                          setState(() {
+                            DatabaseService()
+                                .createObjectAccount(accountData)
+                                .whenComplete(() {
+                              FocusScope.of(context).unfocus();
+                              return Get.back();
+                            });
+                          });
+                        } else {
+                          var accountData = AccountModel(
+                            // id: int.parse(FieldValue.increment(1).toString()),
+                            name: nameController.text,
+                            title: titleController.text,
+                            email: emailController.text,
+                            citizen: citizenController.text,
+                            aboutMe: aboutMeController.text,
+                          );
 
-                      setState(() {
-                        DatabaseService()
-                            .updateDataAccount(accountData, data['name'])
-                            .whenComplete(
-                          () {
-                            FocusScope.of(context).unfocus();
-                            return Get.back();
-                          },
-                        );
-                      });
-                    }
-                  },
-                  child: Text(
-                    (data['type'] == 'add') ? "Add Data" : "Update Data",
-                  ),
+                          setState(() {
+                            DatabaseService()
+                                .updateDataAccount(accountData, data['name'])
+                                .whenComplete(
+                              () {
+                                FocusScope.of(context).unfocus();
+                                return Get.back();
+                              },
+                            );
+                          });
+                        }
+                      },
+                      child: Text(
+                        (data['type'] == 'add') ? "Add Data" : "Update Data",
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
