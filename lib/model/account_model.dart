@@ -1,5 +1,5 @@
 class AccountModel {
-  int? id;
+  var id;
   String? name;
   String? title;
   String? email;
