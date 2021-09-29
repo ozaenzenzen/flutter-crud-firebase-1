@@ -51,4 +51,8 @@ class DatabaseService {
     //   'aboutMe': accountModel.aboutMe,
     // });
   }
+
+  Future deleteDataAccount(String name) async {
+    await collectionReference.doc(name).delete();
+  }
 }
