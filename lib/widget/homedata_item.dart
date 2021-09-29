@@ -48,7 +48,6 @@ class _HomeDataItemState extends State<HomeDataItem> {
           horizontal: screenUtil.setWidth(15),
         ),
         width: screenUtil.screenWidth,
-        // height: screenUtil.setHeight(90),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
@@ -74,16 +73,18 @@ class _HomeDataItemState extends State<HomeDataItem> {
             SizedBox(
               width: screenUtil.setWidth(5),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text("${snapshot.data!.docs[index].data()}"),
-                Text("${widget.name}"),
-                Text("${widget.title}"),
-                Text("${widget.email}"),
-                Text("${widget.citizen}"),
-                Text("${widget.aboutMe}"),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Text("${snapshot.data!.docs[index].data()}"),
+                  Text("${widget.name}"),
+                  Text("${widget.title}"),
+                  Text("${widget.email}"),
+                  Text("${widget.citizen}"),
+                  Text("${widget.aboutMe}"),
+                ],
+              ),
             ),
           ],
         ),
