@@ -6,6 +6,7 @@ import 'package:flutter_crud_firebase_1/utils/fam_images.dart';
 import 'package:get/get.dart';
 
 class HomeDataItem extends StatefulWidget {
+  final String? id;
   final String? name;
   final String? title;
   final String? email;
@@ -13,6 +14,7 @@ class HomeDataItem extends StatefulWidget {
   final String? aboutMe;
 
   HomeDataItem({
+    this.id,
     this.name,
     this.title,
     this.email,
@@ -34,6 +36,7 @@ class _HomeDataItemState extends State<HomeDataItem> {
           () => AddDataPage(),
           arguments: {
             'type': 'update',
+            'id': widget.id,
             'name': widget.name,
             'title': widget.title,
             'email': widget.email,
@@ -44,7 +47,7 @@ class _HomeDataItemState extends State<HomeDataItem> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(
-          vertical: screenUtil.setHeight(15),
+          // vertical: screenUtil.setHeight(15),
           horizontal: screenUtil.setWidth(15),
         ),
         width: screenUtil.screenWidth,
