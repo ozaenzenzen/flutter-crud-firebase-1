@@ -230,7 +230,7 @@ class _AddDataPageState extends State<AddDataPage> {
 
                     setState(() {
                       DatabaseService()
-                          .createObjectAccount(accountData)
+                          .createObjectAccount(accountData, data['id'])
                           .whenComplete(() {
                         FocusScope.of(context).unfocus();
                         return Get.back();
@@ -348,16 +348,26 @@ class _AddDataPageState extends State<AddDataPage> {
                         if (data['type'] == 'add') {
                           var accountData = AccountModel(
                             // id: int.parse(FieldValue.increment(1).toString()),
-                            name: nameController.text,
-                            title: titleController.text,
-                            email: emailController.text,
-                            citizen: citizenController.text,
-                            aboutMe: aboutMeController.text,
+                            name: (nameController.text.isNotEmpty)
+                                ? nameController.text
+                                : "Null",
+                            title: (titleController.text.isNotEmpty)
+                                ? titleController.text
+                                : "Null",
+                            email: (emailController.text.isNotEmpty)
+                                ? emailController.text
+                                : "Null",
+                            citizen: (citizenController.text.isNotEmpty)
+                                ? citizenController.text
+                                : "Null",
+                            aboutMe: (aboutMeController.text.isNotEmpty)
+                                ? aboutMeController.text
+                                : "Null",
                           );
 
                           setState(() {
                             DatabaseService()
-                                .createObjectAccount(accountData)
+                                .createObjectAccount(accountData, data['id'])
                                 .whenComplete(() {
                               FocusScope.of(context).unfocus();
                               return Get.back();
