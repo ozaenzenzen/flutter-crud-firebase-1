@@ -23,18 +23,30 @@ class _HomePageState extends State<HomePage> {
       children: [
         // StreamBuilder<DocumentSnapshot>(
         Container(
+          padding: EdgeInsets.symmetric(
+              // vertical: screenUtil.setHeight(10),
+              // horizontal: screenUtil.setWidth(15),
+              ),
           height: screenUtil.screenHeight,
+          width: screenUtil.screenWidth,
           child: StreamBuilder(
             stream: DatabaseService().getAllDataAccount2(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
-                return ListView.separated(
+                return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.docs.length,
+                  padding: EdgeInsets.symmetric(
+                    vertical: screenUtil.setHeight(10),
+                    // horizontal: screenUtil.setWidth(15),
+                  ),
                   itemBuilder: (context, index) {
                     AccountModel accountModelData = AccountModel.fromJson(
                         snapshot.data!.docs[index].data() as Map);
                     return Dismissible(
+                      onDismissed: (direction) {
+                        // direction
+                      },
                       key: UniqueKey(),
                       background: Container(
                         padding: EdgeInsets.symmetric(
@@ -51,21 +63,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                         color: Colors.red,
                       ),
-                      child: HomeDataItem(
-                        id: snapshot.data!.docs[index].id,
-                        name: accountModelData.name,
-                        title: accountModelData.title,
-                        email: accountModelData.email,
-                        citizen: accountModelData.citizen,
-                        aboutMe: accountModelData.aboutMe,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: screenUtil.setHeight(5),
+                          ),
+                          HomeDataItem(
+                            id: snapshot.data!.docs[index].id,
+                            name: accountModelData.name,
+                            title: accountModelData.title,
+                            email: accountModelData.email,
+                            citizen: accountModelData.citizen,
+                            aboutMe: accountModelData.aboutMe,
+                          ),
+                          SizedBox(
+                            height: screenUtil.setHeight(5),
+                          ),
+                        ],
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return Container(
-                      height: screenUtil.setHeight(20),
-                    );
-                  },
+                  // separatorBuilder: (context, index) {
+                  //   return SizedBox(
+                  //     height: screenUtil.setHeight(15),
+                  //   );
+                  // },
                 );
               } else {
                 return Center(
