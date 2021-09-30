@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_firebase_1/model/account_model.dart';
+import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
 import 'package:flutter_crud_firebase_1/page/adddata_page.dart';
-import 'package:flutter_crud_firebase_1/services/database_service.dart';
+import 'package:flutter_crud_firebase_1/services/dataitem_service.dart';
 import 'package:flutter_crud_firebase_1/widget/homedata_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
