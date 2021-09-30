@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_firebase_1/model/account_model.dart';
-import 'package:flutter_crud_firebase_1/services/database_service.dart';
+import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
+import 'package:flutter_crud_firebase_1/services/dataitem_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -260,11 +260,14 @@ class _AddDataPageState extends State<AddDataPage> {
                 controller: aboutMeController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  label: Text(
-                    "About",
-                    style: GoogleFonts.raleway(
-                      fontSize: screenUtil.setSp(12),
-                      fontWeight: FontWeight.w600,
+                  label: Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "About1",
+                      style: GoogleFonts.raleway(
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   border: OutlineInputBorder(
