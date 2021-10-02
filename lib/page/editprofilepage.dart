@@ -18,8 +18,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController citizenController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
 
+  var data = Get.arguments;
+
+  dataFromProfile() {
+    nameController.text = data['name'];
+    titleController.text = data['title'];
+    citizenController.text = data['citizen'];
+    aboutController.text = data['aboutMe'];
+  }
+
   @override
   Widget build(BuildContext context) {
+    dataFromProfile();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -319,23 +329,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   primary: Colors.pink.shade800,
                 ),
                 onPressed: () {
-                  var profileData = ProfileModel(
-                    name: nameController.text,
-                    title: titleController.text,
-                    citizen: citizenController.text,
-                    aboutMe: aboutController.text,
-                  );
-                  setState(() {
-                    EditProfileService()
-                        .createProfileData(
-                      profileData,
-                      nameController.text,
-                    )
-                        .whenComplete(() {
-                      FocusScope.of(context).unfocus();
-                      return Get.back();
-                    });
-                  });
+                  // var profileData = ProfileModel(
+                  //   name: nameController.text,
+                  //   title: titleController.text,
+                  //   citizen: citizenController.text,
+                  //   aboutMe: aboutController.text,
+                  // );
+                  // setState(() {
+                  //   EditProfileService()
+                  //       .updateProfileData(
+                  //     profileData,
+                  //     data['id'],
+                  //   )
+                  //       .whenComplete(() {
+                  //     FocusScope.of(context).unfocus();
+                  //     return Get.back();
+                  //   });
+                  // });
                 },
                 child: Text("Change"),
               ),
