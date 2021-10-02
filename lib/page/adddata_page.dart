@@ -21,6 +21,14 @@ class _AddDataPageState extends State<AddDataPage> {
 
   var data = Get.arguments;
 
+  FocusNode _focusNode = new FocusNode();
+
+  void _requestFocus() {
+    setState(() {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print(data['type']);
@@ -69,8 +77,16 @@ class _AddDataPageState extends State<AddDataPage> {
                 height: screenUtil.setHeight(5),
               ),
               TextField(
+                focusNode: _focusNode,
+                onTap: _requestFocus,
                 controller: nameController,
                 decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.pink.shade800,
+                    ),
+                  ),
                   constraints: BoxConstraints.tight(
                     Size(
                       screenUtil.screenWidth,
@@ -82,6 +98,9 @@ class _AddDataPageState extends State<AddDataPage> {
                     style: GoogleFonts.raleway(
                       fontSize: screenUtil.setSp(12),
                       fontWeight: FontWeight.w600,
+                      // color: (_focusNode.hasFocus)
+                      //     ? Colors.pink.shade800
+                      //     : Colors.grey.shade600,
                     ),
                   ),
                   border: OutlineInputBorder(
