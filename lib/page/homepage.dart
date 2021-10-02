@@ -32,7 +32,15 @@ class _HomePageState extends State<HomePage> {
           child: StreamBuilder(
             stream: DatabaseService().getAllDataAccount2(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.data == null) {
+                return Center(
+                  child: Container(
+                    height: screenUtil.setHeight(40),
+                    width: screenUtil.setWidth(40),
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              } else {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.docs.length,
@@ -88,14 +96,6 @@ class _HomePageState extends State<HomePage> {
                   //     height: screenUtil.setHeight(15),
                   //   );
                   // },
-                );
-              } else {
-                return Center(
-                  child: Container(
-                    height: screenUtil.setHeight(40),
-                    width: screenUtil.setWidth(40),
-                    child: CircularProgressIndicator(),
-                  ),
                 );
               }
             },
