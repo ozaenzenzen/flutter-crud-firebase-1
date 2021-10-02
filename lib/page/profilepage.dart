@@ -85,7 +85,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(() => EditProfilePage());
+                          Get.to(
+                            () => EditProfilePage(),
+                            arguments: {
+                              'id': snapshot.data!.id,
+                              'name': profileData.name,
+                              'title': profileData.title,
+                              'citizen': profileData.citizen,
+                              'aboutMe': profileData.aboutMe,
+                            },
+                          );
                         },
                         child: Text(
                           "Edit Profile",
