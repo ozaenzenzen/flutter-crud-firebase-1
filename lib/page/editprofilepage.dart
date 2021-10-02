@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/services/editprofile_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -9,6 +12,11 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   ScreenUtil screenUtil = ScreenUtil();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController citizenController = TextEditingController();
+  TextEditingController aboutController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +102,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: screenUtil.setHeight(5),
                   ),
                   TextField(
+                    controller: nameController,
                     decoration: InputDecoration(
                       constraints: BoxConstraints.tight(
                         Size(
@@ -130,6 +139,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: screenUtil.setHeight(5),
                   ),
                   TextField(
+                    controller: titleController,
                     decoration: InputDecoration(
                       constraints: BoxConstraints.tight(
                         Size(
@@ -166,6 +176,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: screenUtil.setHeight(5),
                   ),
                   TextField(
+                    controller: citizenController,
                     decoration: InputDecoration(
                       constraints: BoxConstraints.tight(
                         Size(
@@ -244,6 +255,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: screenUtil.setHeight(5),
                   ),
                   TextField(
+                    controller: aboutController,
                     textInputAction: TextInputAction.done,
                     onSubmitted: (aboutDataField) {
                       //
@@ -307,7 +319,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   primary: Colors.pink.shade800,
                 ),
                 onPressed: () {
-                  //
+                  var profileData = ProfileModel(
+                    name: nameController.text,
+                    title: titleController.text,
+                    citizen: citizenController.text,
+                    aboutMe: aboutController.text,
+                  );
+                  setState(() {
+                    EditProfileService()
+                        .createProfileData(
+                      profileData,
+                      nameController.text,
+                    )
+                        .whenComplete(() {
+                      FocusScope.of(context).unfocus();
+                      return Get.back();
+                    });
+                  });
                 },
                 child: Text("Change"),
               ),
