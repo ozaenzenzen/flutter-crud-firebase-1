@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
+import 'dart:convert';
 
 class EditProfileService {
   static CollectionReference editProfileCollectionReference =
@@ -14,7 +15,10 @@ class EditProfileService {
     });
   }
 
-  Future getProfileData(String id) async {
+  // Future<ProfileModel> getProfileData(String id) async {
+  Future<DocumentSnapshot> getProfileData(String id) async {
+    // var profileData = ProfileModel.fromJson(editProfileCollectionReference.doc(id).get() as Map);
+    // return profileData;
     return await editProfileCollectionReference.doc(id).get();
   }
 

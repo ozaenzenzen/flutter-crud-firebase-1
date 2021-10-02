@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
 
 class DatabaseService {
@@ -19,6 +20,18 @@ class DatabaseService {
 
   Future<DocumentSnapshot> getDataAccount(id) async {
     return await collectionReference.doc(id).get();
+  }
+
+  Future<Either<dynamic, dynamic>> testMethodException() async {
+    String? x;
+    try {
+      return right(x);
+    } on FirebaseException catch (e) {
+      
+      String errorMessage = e.message.toString();
+
+      return left(errorMessage);
+    }
   }
 
   Future<QuerySnapshot> getAllDataAccount() async {
