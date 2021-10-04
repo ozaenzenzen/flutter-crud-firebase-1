@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
-import 'dart:convert';
 
 class EditProfileService {
   static CollectionReference editProfileCollectionReference =
