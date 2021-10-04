@@ -23,7 +23,7 @@ class _AddDataPageState extends State<AddDataPage> {
 
   FocusNode _focusNode = new FocusNode();
 
-  void _requestFocus() {
+  void requestFocus() {
     setState(() {
       FocusScope.of(context).requestFocus(_focusNode);
     });
@@ -78,7 +78,7 @@ class _AddDataPageState extends State<AddDataPage> {
               ),
               TextField(
                 // focusNode: _focusNode,
-                // onTap: _requestFocus,
+                // onTap: requestFocus,
                 controller: nameController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
