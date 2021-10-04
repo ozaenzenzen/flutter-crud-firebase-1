@@ -3,15 +3,15 @@ part of 'account_data_bloc.dart';
 @immutable
 abstract class AccountDataEvent {}
 
-class AccountDataSuccessLoad extends AccountDataEvent {
+class AccountDataEventSuccessLoad extends AccountDataEvent {
   //
 }
 
-class UpdateAccountData extends AccountDataEvent {
+class AccountDataEventUpdate extends AccountDataEvent {
   final AccountModel? accountModel; 
   final String? id;
 
-  UpdateAccountData({
+  AccountDataEventUpdate({
     this.accountModel,
     this.id,
   });
