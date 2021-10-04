@@ -77,8 +77,8 @@ class _AddDataPageState extends State<AddDataPage> {
                 height: screenUtil.setHeight(5),
               ),
               TextField(
-                focusNode: _focusNode,
-                onTap: _requestFocus,
+                // focusNode: _focusNode,
+                // onTap: _requestFocus,
                 controller: nameController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
