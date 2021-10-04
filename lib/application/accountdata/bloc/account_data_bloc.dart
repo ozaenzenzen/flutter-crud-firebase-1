@@ -7,9 +7,22 @@ part 'account_data_event.dart';
 part 'account_data_state.dart';
 
 class AccountDataBloc extends Bloc<AccountDataEvent, AccountDataState> {
-  AccountDataBloc() : super(AccountDataInitial()) {
-    on<AccountDataEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+  AccountDataBloc() : super(AccountDataInitial());
+
+  Stream<AccountDataState> mapEventToState(AccountDataEvent event) async* {
+    if (event is AccountDataEventSuccessLoad) {
+      //
+    } else if (event is AccountDataEventUpdate) {
+      //
+    }
   }
+
+  // AccountDataBloc() : super(AccountDataInitial()) {
+  //   on<AccountDataEvent>((event, emit) {
+  //     // TODO: implement event handler
+  //     Stream mapEventToState(AccountDataEvent event) async* {
+
+  //     }
+  //   });
+  // }
 }
