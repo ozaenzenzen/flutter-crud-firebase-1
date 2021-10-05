@@ -8,7 +8,7 @@ class AccountDataEventSuccessLoad extends AccountDataEvent {
 }
 
 class AccountDataEventUpdate extends AccountDataEvent {
-  final AccountModel? accountModel; 
+  final AccountModel? accountModel;
   final String? id;
 
   AccountDataEventUpdate({
@@ -26,4 +26,25 @@ class AccountDataEventUpdate extends AccountDataEvent {
       'aboutMe': accountModel.aboutMe,
     });
   }
+}
+
+class AccountDataEventCreate extends AccountDataEvent {
+  final AccountModel? accountModel;
+  final String? id;
+
+  AccountDataEventCreate({
+    this.accountModel,
+    this.id,
+  });
+  // static CollectionReference collectionReference = FirebaseFirestore.instance.collection('account');
+  // Future createObjectAccount(AccountModel accountModel, String id) async {
+  //   // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
+  //   await collectionReference.doc(id).set({
+  //     'name': accountModel.name,
+  //     'title': accountModel.title,
+  //     'email': accountModel.email,
+  //     'citizen': accountModel.citizen,
+  //     'aboutMe': accountModel.aboutMe,
+  //   });
+  // }
 }
