@@ -7,10 +7,10 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('account');
   DocumentReference? docref;
 
-  Future createObjectAccount(AccountModel accountModel, String id) async {
+  Future createObjectAccount(AccountModel? accountModel, String id) async {
     // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
     await collectionReference.doc(id).set({
-      'name': accountModel.name,
+      'name': accountModel!.name,
       'title': accountModel.title,
       'email': accountModel.email,
       'citizen': accountModel.citizen,
