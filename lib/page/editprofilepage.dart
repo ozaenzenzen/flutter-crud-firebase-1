@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/services/editprofile_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -327,23 +329,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   primary: Colors.pink.shade800,
                 ),
                 onPressed: () {
-                  // var profileData = ProfileModel(
-                  //   name: nameController.text,
-                  //   title: titleController.text,
-                  //   citizen: citizenController.text,
-                  //   aboutMe: aboutController.text,
-                  // );
-                  // setState(() {
-                  //   EditProfileService()
-                  //       .updateProfileData(
-                  //     profileData,
-                  //     data['id'],
-                  //   )
-                  //       .whenComplete(() {
-                  //     FocusScope.of(context).unfocus();
-                  //     return Get.back();
-                  //   });
-                  // });
+                  var profileData = ProfileModel(
+                    name: nameController.text,
+                    title: titleController.text,
+                    citizen: citizenController.text,
+                    aboutMe: aboutController.text,
+                  );
+
+                  
+                  setState(() {
+                    EditProfileService()
+                        .updateProfileData(
+                      profileData,
+                      data['id'],
+                    )
+                        .whenComplete(() {
+                      FocusScope.of(context).unfocus();
+                      return Get.back();
+                    });
+                  });
                 },
                 child: Text("Change"),
               ),
