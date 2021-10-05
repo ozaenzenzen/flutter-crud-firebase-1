@@ -10,7 +10,8 @@ class AccountDataBloc extends Bloc<AccountDataEvent, AccountDataState> {
   AccountDataBloc() : super(AccountDataInitial());
 
   Stream<AccountDataState> mapEventToState(AccountDataEvent event) async* {
-    if (event is AccountDataEventSuccessLoad) {
+    // final AccountDataState state;
+    if (event is AccountDataEventCreate) {
       //
     } else if (event is AccountDataEventUpdate) {
       //
