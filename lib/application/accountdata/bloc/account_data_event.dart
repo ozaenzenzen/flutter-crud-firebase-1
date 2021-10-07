@@ -36,15 +36,5 @@ class AccountDataEventCreate extends AccountDataEvent {
     this.accountModel,
     this.id,
   });
-  // static CollectionReference collectionReference = FirebaseFirestore.instance.collection('account');
-  // Future createObjectAccount(AccountModel accountModel, String id) async {
-  //   // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
-  //   await collectionReference.doc(id).set({
-  //     'name': accountModel.name,
-  //     'title': accountModel.title,
-  //     'email': accountModel.email,
-  //     'citizen': accountModel.citizen,
-  //     'aboutMe': accountModel.aboutMe,
-  //   });
-  // }
+
 }
