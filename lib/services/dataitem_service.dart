@@ -18,6 +18,18 @@ class DatabaseService {
     });
   }
 
+  Future createObjectAccount2(AccountModel accountModel, String id) {
+    // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
+
+    return collectionReference.doc(id).set({
+      'name': accountModel.name,
+      'title': accountModel.title,
+      'email': accountModel.email,
+      'citizen': accountModel.citizen,
+      'aboutMe': accountModel.aboutMe,
+    });
+  }
+
   Future<DocumentSnapshot> getDataAccount(id) async {
     return await collectionReference.doc(id).get();
   }
@@ -27,7 +39,6 @@ class DatabaseService {
     try {
       return right(x);
     } on FirebaseException catch (e) {
-      
       String errorMessage = e.message.toString();
 
       return left(errorMessage);
