@@ -5,7 +5,10 @@ abstract class AccountDataState {}
 
 class AccountDataInitial extends AccountDataState {}
 
-class AccountDataSuccess extends AccountDataState {}
+class AccountDataSuccess extends AccountDataState {
+  final dynamic thing;
+  AccountDataSuccess({this.thing});
+}
 
 class AccountDataLoading extends AccountDataState {}
 
