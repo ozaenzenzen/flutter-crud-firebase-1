@@ -9,6 +9,7 @@ class DatabaseService {
 
   Future createObjectAccount(AccountModel? accountModel, String id) async {
     // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
+    // print("ID create object accuount: $id");
     await collectionReference.doc(id).set({
       'name': accountModel!.name,
       'title': accountModel.title,
@@ -18,11 +19,11 @@ class DatabaseService {
     });
   }
 
-  Future createObjectAccount2(AccountModel accountModel, String id) {
+  Future createObjectAccount2(AccountModel? accountModel, String id) {
     // Future createObjectAccount(id, {name, title, email, citizen, aboutMe}) async {
 
     return collectionReference.doc(id).set({
-      'name': accountModel.name,
+      'name': accountModel!.name,
       'title': accountModel.title,
       'email': accountModel.email,
       'citizen': accountModel.citizen,
