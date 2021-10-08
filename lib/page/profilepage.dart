@@ -44,11 +44,14 @@ class _ProfilePageState extends State<ProfilePage> {
           future: editProfileService.getProfileData("FlutterXOzan"),
           builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.data == null) {
-              return Center(
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(),
+              return Container(
+                height: screenUtil.screenHeight,
+                child: Center(
+                  child: Container(
+                    height: screenUtil.setHeight(40),
+                    width: screenUtil.setWidth(40),
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
               );
             }
