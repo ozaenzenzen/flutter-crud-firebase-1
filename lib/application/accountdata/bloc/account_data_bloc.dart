@@ -14,10 +14,9 @@ class AccountDataBloc extends Bloc<AccountDataEvent, AccountDataState> {
   Stream<AccountDataState> mapEventToState(AccountDataEvent event) async* {
     print("Coming event: $event");
     if (event is AccountDataEventCreate) {
-      createObjectAccount(event.accountModel, event.id.toString());
-      print("accountModel: ${event.accountModel}");
-      print("id: ${event.id}");
-      print("state: $state");
+      // print("accountModel: ${event.accountModel}");
+      // print("id: ${event.id}");
+      // print("state: $state");
       yield AccountDataLoading();
       try {
         // Future data = await DatabaseService().createObjectAccount2(
@@ -36,7 +35,34 @@ class AccountDataBloc extends Bloc<AccountDataEvent, AccountDataState> {
         yield AccountDataError(e.toString());
       }
     } else if (event is AccountDataEventUpdate) {
-      //
+      yield AccountDataLoading();
+      try {
+        await DatabaseService()
+            .updateDataAccount2(
+          event.accountModel,
+          event.id.toString(),
+        )
+            .onError((error, stackTrace) {
+          AccountDataError(error.toString());
+        });
+
+        yield AccountDataSuccess();
+      } catch (e) {
+        yield AccountDataError(e.toString());
+      }
+    } else if (event is AccountDataEventDelete) {
+      yield AccountDataLoading();
+      try {
+        await DatabaseService()
+            .deleteDataAccount(event.id.toString())
+            .onError((error, stackTrace) {
+          AccountDataError(error.toString());
+        });
+
+        yield AccountDataSuccess();
+      } catch (e) {
+        yield AccountDataError(e.toString());
+      }
     }
   }
 
