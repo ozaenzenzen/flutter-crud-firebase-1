@@ -343,16 +343,22 @@ class _AddDataPageState extends State<AddDataPage> {
                                 aboutMe: aboutDataField,
                               );
 
-                              setState(() {
-                                DatabaseService()
-                                    .updateDataAccount(accountData, data['id'])
-                                    .whenComplete(
-                                  () {
-                                    FocusScope.of(context).unfocus();
-                                    return Get.back();
-                                  },
-                                );
-                              });
+                              // setState(() {
+                              //   DatabaseService()
+                              //       .updateDataAccount(accountData, data['id'])
+                              //       .whenComplete(
+                              //     () {
+                              //       FocusScope.of(context).unfocus();
+                              //       return Get.back();
+                              //     },
+                              //   );
+                              // });
+                              context.read<AccountDataBloc>().add(
+                                    AccountDataEventUpdate(
+                                      accountModel: accountData,
+                                      id: data['id'],
+                                    ),
+                                  );
                             }
                           },
                           controller: aboutMeController,
@@ -390,7 +396,7 @@ class _AddDataPageState extends State<AddDataPage> {
                                       ),
                                       onPressed: () {
                                         showDialog(
-                                          builder: (context) {
+                                          builder: (contextDialog) {
                                             return AlertDialog(
                                               title: Text(
                                                 "Delete",
@@ -420,13 +426,20 @@ class _AddDataPageState extends State<AddDataPage> {
                                                   ),
                                                   onPressed: () {
                                                     Get.back();
-                                                    setState(() {
-                                                      DatabaseService()
-                                                          .deleteDataAccount(
-                                                              data['id'])
-                                                          .whenComplete(
-                                                              () => Get.back());
-                                                    });
+                                                    // setState(() {
+                                                    //   DatabaseService()
+                                                    //       .deleteDataAccount(
+                                                    //           data['id'])
+                                                    //       .whenComplete(
+                                                    //           () => Get.back());
+                                                    // });
+                                                    context
+                                                        .read<AccountDataBloc>()
+                                                        .add(
+                                                          AccountDataEventDelete(
+                                                            id: data['id'],
+                                                          ),
+                                                        );
                                                   },
                                                   child: Text("Yes"),
                                                 ),
@@ -487,8 +500,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                           AccountDataEventCreate(
                                             accountModel: accountData,
                                             id: generateRandomString(10),
-                                            // id: random.nextInt(3000).toString(),
-                                            // id: data['id'],
                                           ),
                                         );
                                   } else {
@@ -501,17 +512,23 @@ class _AddDataPageState extends State<AddDataPage> {
                                       aboutMe: aboutMeController.text,
                                     );
 
-                                    setState(() {
-                                      DatabaseService()
-                                          .updateDataAccount(
-                                              accountData, data['id'])
-                                          .whenComplete(
-                                        () {
-                                          FocusScope.of(context).unfocus();
-                                          return Get.back();
-                                        },
-                                      );
-                                    });
+                                    // setState(() {
+                                    //   DatabaseService()
+                                    //       .updateDataAccount(
+                                    //           accountData, data['id'])
+                                    //       .whenComplete(
+                                    //     () {
+                                    //       FocusScope.of(context).unfocus();
+                                    //       return Get.back();
+                                    //     },
+                                    //   );
+                                    // });
+                                    context.read<AccountDataBloc>().add(
+                                          AccountDataEventUpdate(
+                                            accountModel: accountData,
+                                            id: data['id'],
+                                          ),
+                                        );
                                   }
                                 },
                                 child: Text(
