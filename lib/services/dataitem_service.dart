@@ -69,7 +69,17 @@ class DatabaseService {
     });
   }
 
-  Future deleteDataAccount(String id) async {
+  Future updateDataAccount2(AccountModel? accountModel, String id) {
+    return collectionReference.doc(id).update({
+      'name': accountModel!.name,
+      'title': accountModel.title,
+      'email': accountModel.email,
+      'citizen': accountModel.citizen,
+      'aboutMe': accountModel.aboutMe,
+    });
+  }
+
+  Future deleteDataAccount(String? id) async {
     await collectionReference.doc(id).delete();
   }
 }
