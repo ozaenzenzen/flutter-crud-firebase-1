@@ -78,6 +78,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
             }
           },
           builder: (context, state) {
+            print(state);
+            if (state is EditProfileError) {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("Error"),
+                  content: Text("${state.errorMessage}"),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text("OK"),
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is EditProfileLoading) {
+              Container(
+                alignment: Alignment.center,
+                color: Colors.transparent,
+                height: screenUtil.setHeight(500),
+                child: CircularProgressIndicator(),
+              );
+            }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -370,17 +395,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           aboutMe: aboutController.text,
                         );
 
-                        setState(() {
-                          EditProfileService()
-                              .updateProfileData(
-                            profileData,
-                            data['id'],
-                          )
-                              .whenComplete(() {
-                            FocusScope.of(context).unfocus();
-                            return Get.back();
-                          });
-                        });
+                        context.read<EditProfileBloc>().add(
+                              EditProfileEventUpdate(
+                                profileModel: profileData,
+                                id: data['id'],
+                              ),
+                            );
+
+                        // setState(() {
+                        //   EditProfileService()
+                        //       .updateProfileData(
+                        //     profileData,
+                        //     data['id'],
+                        //   )
+                        //       .whenComplete(() {
+                        //     FocusScope.of(context).unfocus();
+                        //     return Get.back();
+                        //   });
+                        // });
                       },
                       child: Text("Change"),
                     ),
