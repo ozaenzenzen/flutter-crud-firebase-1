@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_crud_firebase_1/application/profile/bloc/edit_profile_bloc.dart';
 import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
 import 'package:flutter_crud_firebase_1/services/editprofile_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,315 +46,317 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: screenUtil.setHeight(20),
-                bottom: screenUtil.setHeight(10),
-                left: screenUtil.setWidth(15),
-              ),
-              child: Text(
-                "Edit Profile",
-                style: GoogleFonts.raleway(
-                  color: Colors.pink.shade800,
-                  fontSize: screenUtil.setSp(28),
-                  fontWeight: FontWeight.w700,
+      body: BlocProvider(
+        create: (context) => EditProfileBloc(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: screenUtil.setHeight(20),
+                  bottom: screenUtil.setHeight(10),
+                  left: screenUtil.setWidth(15),
+                ),
+                child: Text(
+                  "Edit Profile",
+                  style: GoogleFonts.raleway(
+                    color: Colors.pink.shade800,
+                    fontSize: screenUtil.setSp(28),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: screenUtil.setWidth(10),
-                vertical: screenUtil.setHeight(10),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: screenUtil.setWidth(10),
-                vertical: screenUtil.setHeight(10),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 2),
-                    color: Colors.pink.shade100,
-                    spreadRadius: 1,
-                    blurRadius: 6,
-                  )
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Personal",
-                    style: GoogleFonts.raleway(
-                      color: Colors.black,
-                      fontSize: screenUtil.setSp(22),
-                      fontWeight: FontWeight.w700,
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: screenUtil.setWidth(10),
+                  vertical: screenUtil.setHeight(10),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenUtil.setWidth(10),
+                  vertical: screenUtil.setHeight(10),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 2),
+                      color: Colors.pink.shade100,
+                      spreadRadius: 1,
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Personal",
+                      style: GoogleFonts.raleway(
+                        color: Colors.black,
+                        fontSize: screenUtil.setSp(22),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(15),
-                  ),
+                    SizedBox(
+                      height: screenUtil.setHeight(15),
+                    ),
 
-                  // Name Field
-                  Text(
-                    "Name",
-                    style: GoogleFonts.raleway(
-                      fontSize: screenUtil.setSp(12),
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                    // Name Field
+                    Text(
+                      "Name",
+                      style: GoogleFonts.raleway(
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(5),
-                  ),
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints.tight(
-                        Size(
-                          screenUtil.screenWidth,
-                          screenUtil.setHeight(40),
+                    SizedBox(
+                      height: screenUtil.setHeight(5),
+                    ),
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        constraints: BoxConstraints.tight(
+                          Size(
+                            screenUtil.screenWidth,
+                            screenUtil.setHeight(40),
+                          ),
                         ),
-                      ),
-                      label: Text(
-                        "Name",
-                        style: GoogleFonts.raleway(
-                          fontSize: screenUtil.setSp(12),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(10),
-                  ),
-
-                  // Title Field
-                  Text(
-                    "Title",
-                    style: GoogleFonts.raleway(
-                      fontSize: screenUtil.setSp(12),
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(5),
-                  ),
-                  TextField(
-                    controller: titleController,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints.tight(
-                        Size(
-                          screenUtil.screenWidth,
-                          screenUtil.setHeight(40),
-                        ),
-                      ),
-                      label: Text(
-                        "Title",
-                        style: GoogleFonts.raleway(
-                          fontSize: screenUtil.setSp(12),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(10),
-                  ),
-
-                  // Citizen Field
-                  Text(
-                    "Citizen",
-                    style: GoogleFonts.raleway(
-                      fontSize: screenUtil.setSp(12),
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(5),
-                  ),
-                  TextField(
-                    controller: citizenController,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints.tight(
-                        Size(
-                          screenUtil.screenWidth,
-                          screenUtil.setHeight(40),
-                        ),
-                      ),
-                      label: Text(
-                        "Citizen",
-                        style: GoogleFonts.raleway(
-                          fontSize: screenUtil.setSp(12),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(10),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: screenUtil.setHeight(15),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: screenUtil.setWidth(10),
-                vertical: screenUtil.setHeight(10),
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: screenUtil.setWidth(10),
-                vertical: screenUtil.setHeight(10),
-              ),
-              // height: screenUtil.setHeight(400),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 2),
-                    color: Colors.pink.shade100,
-                    spreadRadius: 1,
-                    blurRadius: 6,
-                  )
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "About Me",
-                    style: GoogleFonts.raleway(
-                      color: Colors.black,
-                      fontSize: screenUtil.setSp(22),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(15),
-                  ),
-
-                  // Name Field
-                  Text(
-                    "About Me",
-                    style: GoogleFonts.raleway(
-                      fontSize: screenUtil.setSp(12),
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenUtil.setHeight(5),
-                  ),
-                  TextField(
-                    controller: aboutController,
-                    textInputAction: TextInputAction.done,
-                    onSubmitted: (aboutDataField) {
-                      //
-                    },
-                    // controller: aboutMeController,
-                    maxLines: 5,
-                    decoration: InputDecoration(
-                      label: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "About Me",
+                        label: Text(
+                          "Name",
                           style: GoogleFonts.raleway(
                             fontSize: screenUtil.setSp(12),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
-                  ),
-                  // TextField(
-                  //   textInputAction: TextInputAction.done,
-                  //   onSubmitted: (aboutData) {
-                  //     //
-                  //   },
-                  //   maxLines: 5,
-                  //   decoration: InputDecoration(
-                  //     constraints: BoxConstraints.tight(
-                  //       Size(
-                  //         screenUtil.screenWidth,
-                  //         screenUtil.setHeight(40),
-                  //       ),
-                  //     ),
-                  //     label: Text(
-                  //       "About Me",
-                  //       style: GoogleFonts.raleway(
-                  //         fontSize: screenUtil.setSp(12),
-                  //         fontWeight: FontWeight.w600,
-                  //       ),
-                  //     ),
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(12),
-                  //     ),
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: screenUtil.setHeight(15),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: screenUtil.setWidth(20),
-              ),
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink.shade800,
-                ),
-                onPressed: () {
-                  var profileData = ProfileModel(
-                    name: nameController.text,
-                    title: titleController.text,
-                    citizen: citizenController.text,
-                    aboutMe: aboutController.text,
-                  );
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
 
-                  
-                  setState(() {
-                    EditProfileService()
-                        .updateProfileData(
-                      profileData,
-                      data['id'],
-                    )
-                        .whenComplete(() {
-                      FocusScope.of(context).unfocus();
-                      return Get.back();
-                    });
-                  });
-                },
-                child: Text("Change"),
+                    // Title Field
+                    Text(
+                      "Title",
+                      style: GoogleFonts.raleway(
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(5),
+                    ),
+                    TextField(
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        constraints: BoxConstraints.tight(
+                          Size(
+                            screenUtil.screenWidth,
+                            screenUtil.setHeight(40),
+                          ),
+                        ),
+                        label: Text(
+                          "Title",
+                          style: GoogleFonts.raleway(
+                            fontSize: screenUtil.setSp(12),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
+
+                    // Citizen Field
+                    Text(
+                      "Citizen",
+                      style: GoogleFonts.raleway(
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(5),
+                    ),
+                    TextField(
+                      controller: citizenController,
+                      decoration: InputDecoration(
+                        constraints: BoxConstraints.tight(
+                          Size(
+                            screenUtil.screenWidth,
+                            screenUtil.setHeight(40),
+                          ),
+                        ),
+                        label: Text(
+                          "Citizen",
+                          style: GoogleFonts.raleway(
+                            fontSize: screenUtil.setSp(12),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(10),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: screenUtil.setHeight(15),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: screenUtil.setWidth(10),
+                  vertical: screenUtil.setHeight(10),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenUtil.setWidth(10),
+                  vertical: screenUtil.setHeight(10),
+                ),
+                // height: screenUtil.setHeight(400),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 2),
+                      color: Colors.pink.shade100,
+                      spreadRadius: 1,
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "About Me",
+                      style: GoogleFonts.raleway(
+                        color: Colors.black,
+                        fontSize: screenUtil.setSp(22),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(15),
+                    ),
+
+                    // Name Field
+                    Text(
+                      "About Me",
+                      style: GoogleFonts.raleway(
+                        fontSize: screenUtil.setSp(12),
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenUtil.setHeight(5),
+                    ),
+                    TextField(
+                      controller: aboutController,
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: (aboutDataField) {
+                        //
+                      },
+                      // controller: aboutMeController,
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        label: Container(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "About Me",
+                            style: GoogleFonts.raleway(
+                              fontSize: screenUtil.setSp(12),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                    // TextField(
+                    //   textInputAction: TextInputAction.done,
+                    //   onSubmitted: (aboutData) {
+                    //     //
+                    //   },
+                    //   maxLines: 5,
+                    //   decoration: InputDecoration(
+                    //     constraints: BoxConstraints.tight(
+                    //       Size(
+                    //         screenUtil.screenWidth,
+                    //         screenUtil.setHeight(40),
+                    //       ),
+                    //     ),
+                    //     label: Text(
+                    //       "About Me",
+                    //       style: GoogleFonts.raleway(
+                    //         fontSize: screenUtil.setSp(12),
+                    //         fontWeight: FontWeight.w600,
+                    //       ),
+                    //     ),
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(12),
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: screenUtil.setHeight(15),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: screenUtil.setWidth(20),
+                ),
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink.shade800,
+                  ),
+                  onPressed: () {
+                    var profileData = ProfileModel(
+                      name: nameController.text,
+                      title: titleController.text,
+                      citizen: citizenController.text,
+                      aboutMe: aboutController.text,
+                    );
+
+                    setState(() {
+                      EditProfileService()
+                          .updateProfileData(
+                        profileData,
+                        data['id'],
+                      )
+                          .whenComplete(() {
+                        FocusScope.of(context).unfocus();
+                        return Get.back();
+                      });
+                    });
+                  },
+                  child: Text("Change"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
