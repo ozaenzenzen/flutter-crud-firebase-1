@@ -21,6 +21,10 @@ class EditProfileService {
     return await editProfileCollectionReference.doc(id).get();
   }
 
+  Stream<QuerySnapshot> getProfileData2() {
+    return editProfileCollectionReference.snapshots();
+  }
+
   Future updateProfileData(ProfileModel profileModel, String id) async {
     await editProfileCollectionReference.doc(id).update({
       'name': profileModel.name,
