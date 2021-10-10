@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_crud_firebase_1/application/accountdata/bloc/account_data_bloc.dart';
 import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
-import 'package:flutter_crud_firebase_1/services/dataitem_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
