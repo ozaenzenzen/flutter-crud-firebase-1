@@ -21,8 +21,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
                 error.toString(),
               ),
             );
+        yield EditProfileSuccess();
       } catch (e) {
-        EditProfileError(e.toString());
+        yield EditProfileError(e.toString());
       }
     }
   }
