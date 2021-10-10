@@ -40,9 +40,11 @@ class _ProfilePageState extends State<ProfilePage> {
     // totalValue();
     return SingleChildScrollView(
       // child: FutureBuilder<ProfileModel>(
-      child: FutureBuilder<DocumentSnapshot>(
-          future: editProfileService.getProfileData("FlutterXOzan"),
-          builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+      child: StreamBuilder(
+      // child: FutureBuilder<DocumentSnapshot>(
+          stream: editProfileService.getProfileData2(),
+          // future: editProfileService.getProfileData("FlutterXOzan"),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.data == null) {
               return Container(
                 height: screenUtil.screenHeight,
@@ -55,8 +57,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               );
             }
-            var profileData =
-                ProfileModel.fromJson(snapshot.data!.data() as Map);
+            
+            var profileData = ProfileModel.fromJson(snapshot.data!.docs[0].data() as Map);
+            // var profileData = ProfileModel.fromJson(snapshot.data!.data() as Map);
+            // print("Data stream: ${snapshot.data!.docs[0].id}");
 
             return Container(
               padding: EdgeInsets.symmetric(
@@ -90,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Get.to(
                             () => EditProfilePage(),
                             arguments: {
-                              'id': snapshot.data!.id,
+                              'id': snapshot.data!.docs[0].id,
                               'name': profileData.name,
                               'title': profileData.title,
                               'citizen': profileData.citizen,
