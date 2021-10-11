@@ -62,22 +62,4 @@ class AccountDataBloc extends Bloc<AccountDataEvent, AccountDataState> {
     }
   }
 
-  Stream<AccountDataState> createObjectAccount(
-      AccountModel? accountModel, String id) async* {
-    print("accountModel: $accountModel");
-    print("id: $id");
-    print("state: $state");
-    yield AccountDataLoading();
-    try {
-      await DatabaseService()
-          .createObjectAccount2(accountModel!, id)
-          .onError((error, stackTrace) {
-        AccountDataError(error.toString());
-      });
-
-      yield AccountDataSuccess();
-    } catch (e) {
-      yield AccountDataError(e.toString());
-    }
-  }
 }
