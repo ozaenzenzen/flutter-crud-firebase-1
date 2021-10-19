@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_crud_firebase_1/application/profile/bloc/edit_profile_bloc.dart';
 import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/widget/state_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,26 +52,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
           listener: (context, state) {
             if (state is EditProfileLoading) {
               Container(
-                alignment: Alignment.center,
-                color: Colors.transparent,
                 height: screenUtil.setHeight(500),
-                child: CircularProgressIndicator(),
+                alignment: Alignment.center,
+                child: StateWidget.stateWidget!.stateLoadingIndicator(),
               );
             } else if (state is EditProfileError) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text("Error"),
-                  content: Text("${state.errorMessage}"),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text("OK"),
-                    ),
-                  ],
-                ),
+                builder: (context) {
+                  return StateWidget.stateWidget!
+                      .stateErrorMessage(state.errorMessage);
+                },
               );
             } else if (state is EditProfileSuccess) {
               Get.back();
@@ -81,25 +73,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
             if (state is EditProfileError) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text("Error"),
-                  content: Text("${state.errorMessage}"),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text("OK"),
-                    ),
-                  ],
-                ),
+                builder: (context) {
+                  return StateWidget.stateWidget!
+                      .stateErrorMessage(state.errorMessage);
+                },
               );
             } else if (state is EditProfileLoading) {
-              Container(
-                alignment: Alignment.center,
-                color: Colors.transparent,
+              return Container(
                 height: screenUtil.setHeight(500),
-                child: CircularProgressIndicator(),
+                alignment: Alignment.center,
+                child: StateWidget.stateWidget!.stateLoadingIndicator(),
               );
             }
             return SingleChildScrollView(
@@ -356,7 +339,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         //     constraints: BoxConstraints.tight(
                         //       Size(
                         //         screenUtil.screenWidth,
-                        //         screenUtil.setHeight(40),
+                        //         screenUtil.setHeight(140),
                         //       ),
                         //     ),
                         //     label: Text(
