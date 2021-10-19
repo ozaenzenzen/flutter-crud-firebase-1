@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
-import 'package:flutter_crud_firebase_1/services/editprofile_service.dart';
+import 'package:flutter_crud_firebase_1/data/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/domain/services/editprofile_service.dart';
 import 'package:meta/meta.dart';
 
 part 'edit_profile_event.dart';

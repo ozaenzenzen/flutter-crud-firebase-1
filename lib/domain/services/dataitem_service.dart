@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
+import 'package:flutter_crud_firebase_1/data/model/accountdata_model.dart';
 
 class DatabaseService {
   static CollectionReference collectionReference =

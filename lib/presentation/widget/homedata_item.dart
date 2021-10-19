@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_firebase_1/page/adddata_page.dart';
+import 'package:flutter_crud_firebase_1/presentation/page/adddata_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_crud_firebase_1/utils/fam_images.dart';

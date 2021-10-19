@@ -1,4 +1,4 @@
-import 'package:flutter_crud_firebase_1/model/ratecalulation_model.dart';
+import 'package:flutter_crud_firebase_1/data/model/ratecalulation_model.dart';
 
 class RateCalculationData {
   List _data = [

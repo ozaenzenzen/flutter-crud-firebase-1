@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_crud_firebase_1/model/accountdata_model.dart';
-import 'package:flutter_crud_firebase_1/services/dataitem_service.dart';
+import 'package:flutter_crud_firebase_1/data/model/accountdata_model.dart';
+import 'package:flutter_crud_firebase_1/domain/services/dataitem_service.dart';
 import 'package:meta/meta.dart';
 
 part 'account_data_event.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_crud_firebase_1/application/profile/bloc/edit_profile_bloc.dart';
-import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
-import 'package:flutter_crud_firebase_1/widget/state_widget.dart';
+import 'package:flutter_crud_firebase_1/data/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/presentation/application/profile/bloc/edit_profile_bloc.dart';
+import 'package:flutter_crud_firebase_1/presentation/widget/state_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

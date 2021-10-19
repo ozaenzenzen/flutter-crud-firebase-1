@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_firebase_1/data/ratecalculation_data.dart';
-import 'package:flutter_crud_firebase_1/model/profiledata_model.dart';
-import 'package:flutter_crud_firebase_1/page/editprofilepage.dart';
-import 'package:flutter_crud_firebase_1/services/editprofile_service.dart';
+import 'package:flutter_crud_firebase_1/data/localdata/ratecalculation_data.dart';
+import 'package:flutter_crud_firebase_1/data/model/profiledata_model.dart';
+import 'package:flutter_crud_firebase_1/domain/services/editprofile_service.dart';
+import 'package:flutter_crud_firebase_1/presentation/page/editprofilepage.dart';
 import 'package:flutter_crud_firebase_1/utils/fam_images.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return SingleChildScrollView(
       // child: FutureBuilder<ProfileModel>(
       child: StreamBuilder(
-      // child: FutureBuilder<DocumentSnapshot>(
+          // child: FutureBuilder<DocumentSnapshot>(
           stream: editProfileService.getProfileData2(),
           // future: editProfileService.getProfileData("FlutterXOzan"),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -57,8 +57,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               );
             }
-            
-            var profileData = ProfileModel.fromJson(snapshot.data!.docs[0].data() as Map);
+
+            var profileData =
+                ProfileModel.fromJson(snapshot.data!.docs[0].data() as Map);
             // var profileData = ProfileModel.fromJson(snapshot.data!.data() as Map);
             // print("Data stream: ${snapshot.data!.docs[0].id}");
 

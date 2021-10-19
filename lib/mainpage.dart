@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_crud_firebase_1/page/homepage.dart';
-import 'package:flutter_crud_firebase_1/page/profilepage.dart';
+import 'package:flutter_crud_firebase_1/presentation/page/homepage.dart';
+import 'package:flutter_crud_firebase_1/presentation/page/profilepage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
