@@ -104,27 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: screenUtil.setWidth(10),
-                      vertical: screenUtil.setHeight(10),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenUtil.setWidth(10),
-                      vertical: screenUtil.setHeight(10),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 2),
-                          color: Colors.pink.shade100,
-                          spreadRadius: 1,
-                          blurRadius: 6,
-                        )
-                      ],
-                    ),
+                  editProfileContainer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -141,143 +121,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
 
                         // Name Field
-                        Text(
-                          "Name",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(12),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: nameController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Name",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(10),
-                        ),
+                        editProfileTextField("Name", nameController),
 
                         // Title Field
-                        Text(
-                          "Title",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(12),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: titleController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Title",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(10),
-                        ),
+                        editProfileTextField("Title", titleController),
 
                         // Citizen Field
-                        Text(
-                          "Citizen",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(12),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: citizenController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Citizen",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(10),
-                        ),
+                        editProfileTextField("Citizen", citizenController),
                       ],
                     ),
                   ),
                   SizedBox(
                     height: screenUtil.setHeight(15),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: screenUtil.setWidth(10),
-                      vertical: screenUtil.setHeight(10),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenUtil.setWidth(10),
-                      vertical: screenUtil.setHeight(10),
-                    ),
-                    // height: screenUtil.setHeight(400),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 2),
-                          color: Colors.pink.shade100,
-                          spreadRadius: 1,
-                          blurRadius: 6,
-                        )
-                      ],
-                    ),
+                  editProfileContainer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -311,7 +168,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           onSubmitted: (aboutDataField) {
                             //
                           },
-                          // controller: aboutMeController,
                           maxLines: 5,
                           decoration: InputDecoration(
                             label: Container(
@@ -329,31 +185,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                           ),
                         ),
-                        // TextField(
-                        //   textInputAction: TextInputAction.done,
-                        //   onSubmitted: (aboutData) {
-                        //     //
-                        //   },
-                        //   maxLines: 5,
-                        //   decoration: InputDecoration(
-                        //     constraints: BoxConstraints.tight(
-                        //       Size(
-                        //         screenUtil.screenWidth,
-                        //         screenUtil.setHeight(140),
-                        //       ),
-                        //     ),
-                        //     label: Text(
-                        //       "About Me",
-                        //       style: GoogleFonts.raleway(
-                        //         fontSize: screenUtil.setSp(12),
-                        //         fontWeight: FontWeight.w600,
-                        //       ),
-                        //     ),
-                        //     border: OutlineInputBorder(
-                        //       borderRadius: BorderRadius.circular(12),
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(
                           height: screenUtil.setHeight(15),
                         ),
@@ -383,18 +214,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 id: data['id'],
                               ),
                             );
-
-                        // setState(() {
-                        //   EditProfileService()
-                        //       .updateProfileData(
-                        //     profileData,
-                        //     data['id'],
-                        //   )
-                        //       .whenComplete(() {
-                        //     FocusScope.of(context).unfocus();
-                        //     return Get.back();
-                        //   });
-                        // });
                       },
                       child: Text("Change"),
                     ),
@@ -405,6 +224,79 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget editProfileTextField(
+    String nameField,
+    TextEditingController controller,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          nameField,
+          style: GoogleFonts.raleway(
+            fontSize: screenUtil.setSp(12),
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          height: screenUtil.setHeight(5),
+        ),
+        TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            constraints: BoxConstraints.tight(
+              Size(
+                screenUtil.screenWidth,
+                screenUtil.setHeight(40),
+              ),
+            ),
+            label: Text(
+              nameField,
+              style: GoogleFonts.raleway(
+                fontSize: screenUtil.setSp(12),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: screenUtil.setHeight(10),
+        ),
+      ],
+    );
+  }
+
+  Widget editProfileContainer({Widget? child}) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: screenUtil.setWidth(10),
+        vertical: screenUtil.setHeight(10),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenUtil.setWidth(10),
+        vertical: screenUtil.setHeight(10),
+      ),
+      // height: screenUtil.setHeight(400),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 2),
+            color: Colors.pink.shade100,
+            spreadRadius: 1,
+            blurRadius: 6,
+          )
+        ],
+      ),
+      child: child,
     );
   }
 }
