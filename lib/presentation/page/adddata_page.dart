@@ -137,163 +137,16 @@ class _AddDataPageState extends State<AddDataPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // nameController
-                        Text(
-                          "Name",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(13),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          // focusNode: _focusNode,
-                          // onTap: requestFocus,
-                          controller: nameController,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Colors.pink.shade800,
-                              ),
-                            ),
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Name",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                                // color: (_focusNode.hasFocus)
-                                //     ? Colors.pink.shade800
-                                //     : Colors.grey.shade600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(15),
-                        ),
+                        addDataTextField("Name", nameController),
 
                         // titleController
-                        Text(
-                          "Title",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(13),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: titleController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Title",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(15),
-                        ),
+                        addDataTextField("Title", titleController),
 
                         // emailController
-                        Text(
-                          "Email",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(13),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Email",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(15),
-                        ),
+                        addDataTextField("Email", emailController),
 
                         // citizenController
-                        Text(
-                          "Citizen",
-                          style: GoogleFonts.raleway(
-                            fontSize: screenUtil.setSp(13),
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(5),
-                        ),
-                        TextField(
-                          controller: citizenController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints.tight(
-                              Size(
-                                screenUtil.screenWidth,
-                                screenUtil.setHeight(40),
-                              ),
-                            ),
-                            label: Text(
-                              "Citizen",
-                              style: GoogleFonts.raleway(
-                                fontSize: screenUtil.setSp(12),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenUtil.setHeight(15),
-                        ),
+                        addDataTextField("Citizen", citizenController),
 
                         // aboutMeController
                         Text(
@@ -319,14 +172,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                 aboutMe: aboutDataField,
                               );
 
-                              // setState(() {
-                              //   DatabaseService()
-                              //       .createObjectAccount(accountData, data['id'])
-                              //       .whenComplete(() {
-                              //     FocusScope.of(context).unfocus();
-                              //     return Get.back();
-                              //   });
-                              // });
                               context.read<AccountDataBloc>().add(
                                     AccountDataEventCreate(
                                       accountModel: accountData,
@@ -342,16 +187,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                 aboutMe: aboutDataField,
                               );
 
-                              // setState(() {
-                              //   DatabaseService()
-                              //       .updateDataAccount(accountData, data['id'])
-                              //       .whenComplete(
-                              //     () {
-                              //       FocusScope.of(context).unfocus();
-                              //       return Get.back();
-                              //     },
-                              //   );
-                              // });
                               context.read<AccountDataBloc>().add(
                                     AccountDataEventUpdate(
                                       accountModel: accountData,
@@ -366,7 +201,7 @@ class _AddDataPageState extends State<AddDataPage> {
                             label: Container(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                "About1",
+                                "About",
                                 style: GoogleFonts.raleway(
                                   fontSize: screenUtil.setSp(12),
                                   fontWeight: FontWeight.w600,
@@ -425,13 +260,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                                   ),
                                                   onPressed: () {
                                                     Get.back();
-                                                    // setState(() {
-                                                    //   DatabaseService()
-                                                    //       .deleteDataAccount(
-                                                    //           data['id'])
-                                                    //       .whenComplete(
-                                                    //           () => Get.back());
-                                                    // });
                                                     context
                                                         .read<AccountDataBloc>()
                                                         .add(
@@ -486,15 +314,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                               : "Null",
                                     );
 
-                                    // setState(() {
-                                    //   DatabaseService()
-                                    //       .createObjectAccount(accountData, data['id'])
-                                    //       .whenComplete(() {
-                                    //     FocusScope.of(context).unfocus();
-                                    //     return Get.back();
-                                    //   });
-                                    // });
-
                                     context.read<AccountDataBloc>().add(
                                           AccountDataEventCreate(
                                             accountModel: accountData,
@@ -511,17 +330,6 @@ class _AddDataPageState extends State<AddDataPage> {
                                       aboutMe: aboutMeController.text,
                                     );
 
-                                    // setState(() {
-                                    //   DatabaseService()
-                                    //       .updateDataAccount(
-                                    //           accountData, data['id'])
-                                    //       .whenComplete(
-                                    //     () {
-                                    //       FocusScope.of(context).unfocus();
-                                    //       return Get.back();
-                                    //     },
-                                    //   );
-                                    // });
                                     context.read<AccountDataBloc>().add(
                                           AccountDataEventUpdate(
                                             accountModel: accountData,
@@ -548,6 +356,58 @@ class _AddDataPageState extends State<AddDataPage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget addDataTextField(
+    String nameField,
+    TextEditingController controller,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          nameField,
+          style: GoogleFonts.raleway(
+            fontSize: screenUtil.setSp(13),
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          height: screenUtil.setHeight(5),
+        ),
+        TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(
+                color: Colors.pink.shade800,
+              ),
+            ),
+            constraints: BoxConstraints.tight(
+              Size(
+                screenUtil.screenWidth,
+                screenUtil.setHeight(40),
+              ),
+            ),
+            label: Text(
+              nameField,
+              style: GoogleFonts.raleway(
+                fontSize: screenUtil.setSp(12),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: screenUtil.setHeight(15),
+        ),
+      ],
     );
   }
 }
